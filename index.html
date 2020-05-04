@@ -2,33 +2,46 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title> Valentine's Day Easter-Egg </title>
 </head>
 <body>
-	<canvas id="tela" width="200" height="200">
+	<canvas id="tela" width="400" height="400">
 		Seu navegador não suporta este jogo
 	</canvas>
 
 	<script>
 
-		var canvas = document.getElementById('tela')
-		var ctx = canvas.getContext('2d')
+		const  canvas = document.getElementById('tela')
+		const  ctx = canvas.getContext('2d')
 
-		var width = 200
-		var height = 200
+		const width = canvas.width
+	  const height = canvas.height
 
-		var px = py = 50
+    var points = 0
 
-	
-		
+		var px = py = 0
+
+    randNum = Math.floor(Math.random() * 390)
+    var ax = ay =	randNum - (randNum % 10) 
+
 		function game () {
 
-			ctx.fillStyle = 'white'
+			ctx.fillStyle = 'black'
 			ctx.fillRect(0, 0, width, height)
 
-			ctx.fillStyle = 'black'
+			ctx.fillStyle = 'white'
 			ctx.fillRect(px, py, 10, 10)
+
+      ctx.fillStyle = 'red'
+      ctx.fillRect(ax, ay, 10, 10)
+
+      if (ax == px && ay == py){
+         randNum = Math.floor(Math.random() * 390)
+         ax = ay =	randNum - (randNum % 10)
+         points += 1
+      }
 		}
+
 
 		function moviment (event) {
 			
@@ -40,26 +53,72 @@
 			}
 
 			switch (event.keyCode) {
-				case move.up:
-					py -= 10 
-					break
+				case move.up: 
+          py <= 0 ? py = 390 : py -= 10
+          console.log(py)
+				break
+
 				case move.down:
-					py += 10
-					break
+          py >= 390 ? py = 0 : py += 10
+          break
 
 				case move.right:
-					px += 10
+          px >= 390 ? px = 0 : px += 10
 					break
 
 				case move.left:
-					px -= 10
-					break
+					px <= 0 ? px = 390 : px -= 10
 			}
 		}
+
+    function drawHeart () { 
+      ctx.fillRect(0, 0, width, height)
+    	ctx.fillStyle = '#181818'
+
+			ctx.fillRect(0, 0, 400, 400)
+      var w = 200, h = 200;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeWeight = 3;
+      ctx.shadowOffsetX = 4.0;
+      ctx.shadowOffsetY = 4.0;
+      ctx.lineWidth = 10.0;
+      ctx.fillStyle = "#FF0000";
+      var d = Math.min(w, h);
+      var k = 100;
+      ctx.moveTo(k, k + d / 4);
+      ctx.quadraticCurveTo(k, k, k + d / 4, k);
+      ctx.quadraticCurveTo(k + d / 2, k, k + d / 2, k + d / 4);
+      ctx.quadraticCurveTo(k + d / 2, k, k + d * 3/4, k);
+      ctx.quadraticCurveTo(k + d, k, k + d, k + d / 4);
+      ctx.quadraticCurveTo(k + d, k + d / 2, k + d * 3/4, k + d * 3/4);
+      ctx.lineTo(k + d / 2, k + d);
+      ctx.lineTo(k + d / 4, k + d * 3/4);
+      ctx.quadraticCurveTo(k, k + d / 2, k, k + d / 4);
+      ctx.stroke();
+      ctx.fill();
+ 
+      ctx.font = "25px Times";
+      ctx.fillStyle = "#ffc2ab";
+      ctx.textAlign = "center";
+      ctx.fillText("Cada cubo vermelho que você pegou", 200, 50);
+      ctx.fillText("representa um ano de nossa história", 200, 80);
+
+      ctx.font = "25px Times";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.fillText("Todo seu,", 200, 180);
+      ctx.fillText("Aninha", 200, 210);
+           
+      ctx.font = "600 35px Times";
+      ctx.fillStyle = "#ffc2ab";
+      ctx.textAlign = "center";
+      ctx.fillText("Feliz Dia dos Namorados", 200, 360);
+
+    }
 		
 		window.addEventListener('keydown', moviment, true)
 		setInterval(game, 60)
-
+    
 	</script>
 </body>
 </html>
