@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<canvas id="tela" width="200" height="200">
+		Seu navegador não suporta este jogo
+	</canvas>
+
+	<script>
+
+		var canvas = document.getElementById('tela')
+		var ctx = canvas.getContext('2d')
+
+		var width = 200
+		var height = 200
+
+		var px = py = 50
+
+	
+		
+		function game () {
+
+			ctx.fillStyle = 'white'
+			ctx.fillRect(0, 0, width, height)
+
+			ctx.fillStyle = 'black'
+			ctx.fillRect(px, py, 10, 10)
+		}
+
+		function moviment (event) {
+			
+			var move = {
+				up: 38,
+				down: 40,
+				left: 37,
+				right: 39
+			}
+
+			switch (event.keyCode) {
+				case move.up:
+					py -= 10 
+					break
+				case move.down:
+					py += 10
+					break
+
+				case move.right:
+					px += 10
+					break
+
+				case move.left:
+					px -= 10
+					break
+			}
+		}
+		
+		window.addEventListener('keydown', moviment, true)
+		setInterval(game, 60)
+
+	</script>
+</body>
+</html>
