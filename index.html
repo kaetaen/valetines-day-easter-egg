@@ -3,19 +3,54 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Valentine's Day Easter-Egg </title>
+  <style>
+#content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tela {
+  margin-top: 100px;
+} 
+
+#pointMark {
+  background-color: #181818;
+  width: 400px;
+  color: white;
+  text-align: center;
+}
+
+#pointMark p {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 1px;
+  color: white;
+}
+
+  </style>
 </head>
 <body>
-	<canvas id="tela" width="400" height="400">
-		Seu navegador não suporta este jogo
-	</canvas>
+  <div id="content">
+	  <canvas id="tela" width="400" height="400">
+		  Seu navegador não suporta este jogo
+	  </canvas>
+    <div id='pointMark'>
+      <p> 0 </p>
+    </div>
+  <div>
 
 	<script>
 
-		const  canvas = document.getElementById('tela')
-		const  ctx = canvas.getContext('2d')
+		const canvas = document.getElementById('tela')
+		const ctx = canvas.getContext('2d')
+    const pointMark = document.querySelector('#pointMark p')
 
 		const width = canvas.width
 	  const height = canvas.height
+
+    gamePage = true
 
     var points = 0
 
@@ -25,23 +60,31 @@
     var ax = ay =	randNum - (randNum % 10) 
 
 		function game () {
+      if (gamePage === true){
+        ctx.fillStyle = '#181818'
+        ctx.fillRect(0, 0, width, height)
 
-			ctx.fillStyle = 'black'
-			ctx.fillRect(0, 0, width, height)
+        ctx.fillStyle = 'white'
+        ctx.fillRect(px, py, 10, 10)
 
-			ctx.fillStyle = 'white'
-			ctx.fillRect(px, py, 10, 10)
+        ctx.fillStyle = 'red'
+        ctx.fillRect(ax, ay, 10, 10)
 
-      ctx.fillStyle = 'red'
-      ctx.fillRect(ax, ay, 10, 10)
+        if (ax == px && ay == py){
+          randNum = Math.floor(Math.random() * 390)
+          ax = ay =	randNum - (randNum % 10)
+          points += 1
+          pointMark.innerText = points
 
-      if (ax == px && ay == py){
-         randNum = Math.floor(Math.random() * 390)
-         ax = ay =	randNum - (randNum % 10)
-         points += 1
+        if (points === 7){
+          gamePage = false
+          pointMark.style.color = 'red'
+          drawHeart()
+        }
+        
       }
-		}
-
+    }
+  }
 
 		function moviment (event) {
 			
@@ -55,7 +98,6 @@
 			switch (event.keyCode) {
 				case move.up: 
           py <= 0 ? py = 390 : py -= 10
-          console.log(py)
 				break
 
 				case move.down:
@@ -71,7 +113,8 @@
 			}
 		}
 
-    function drawHeart () { 
+    function drawHeart () {
+      
       ctx.fillRect(0, 0, width, height)
     	ctx.fillStyle = '#181818'
 
@@ -112,8 +155,7 @@
       ctx.font = "600 35px Times";
       ctx.fillStyle = "#ffc2ab";
       ctx.textAlign = "center";
-      ctx.fillText("Feliz Dia dos Namorados", 200, 360);
-
+      ctx.fillText("Feliz Dia dos Namorados", 200, 360); 
     }
 		
 		window.addEventListener('keydown', moviment, true)
