@@ -1,166 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
 	<title> Valentine's Day Easter-Egg </title>
-  <style>
-#content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-}
-
-#tela {
-  margin-top: 100px;
-} 
-
-#pointMark {
-  background-color: #181818;
-  width: 400px;
-  color: white;
-  text-align: center;
-}
-
-#pointMark p {
-  font-size: 40px;
-  font-weight: 600;
-  margin: 1px;
-  color: white;
-}
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="content">
-	  <canvas id="tela" width="400" height="400">
-		  Seu navegador não suporta este jogo
+	  <canvas id="game-screen" width="400" height="400">
+		  Seu navegador não suporta este jogo.
 	  </canvas>
-    <div id='pointMark'>
+    <div id="point-counter">
       <p> 0 </p>
     </div>
   <div>
-
-	<script>
-
-		const canvas = document.getElementById('tela')
-		const ctx = canvas.getContext('2d')
-    const pointMark = document.querySelector('#pointMark p')
-
-		const width = canvas.width
-	  const height = canvas.height
-
-    gamePage = true
-
-    var points = 0
-
-		var px = py = 0
-
-    randNum = Math.floor(Math.random() * 390)
-    var ax = ay =	randNum - (randNum % 10) 
-
-		function game () {
-      if (gamePage === true){
-        ctx.fillStyle = '#181818'
-        ctx.fillRect(0, 0, width, height)
-
-        ctx.fillStyle = 'white'
-        ctx.fillRect(px, py, 10, 10)
-
-        ctx.fillStyle = 'red'
-        ctx.fillRect(ax, ay, 10, 10)
-
-        if (ax == px && ay == py){
-          randNum = Math.floor(Math.random() * 390)
-          ax = ay =	randNum - (randNum % 10)
-          points += 1
-          pointMark.innerText = points
-
-        if (points === 7){
-          gamePage = false
-          pointMark.style.color = 'red'
-          drawHeart()
-        }
-        
-      }
-    }
-  }
-
-		function moviment (event) {
-			
-			var move = {
-				up: 38,
-				down: 40,
-				left: 37,
-				right: 39
-			}
-
-			switch (event.keyCode) {
-				case move.up: 
-          py <= 0 ? py = 390 : py -= 10
-				break
-
-				case move.down:
-          py >= 390 ? py = 0 : py += 10
-          break
-
-				case move.right:
-          px >= 390 ? px = 0 : px += 10
-					break
-
-				case move.left:
-					px <= 0 ? px = 390 : px -= 10
-			}
-		}
-
-    function drawHeart () {
-      
-      ctx.fillRect(0, 0, width, height)
-    	ctx.fillStyle = '#181818'
-
-			ctx.fillRect(0, 0, 400, 400)
-      var w = 200, h = 200;
-      ctx.strokeStyle = "#000000";
-      ctx.strokeWeight = 3;
-      ctx.shadowOffsetX = 4.0;
-      ctx.shadowOffsetY = 4.0;
-      ctx.lineWidth = 10.0;
-      ctx.fillStyle = "#FF0000";
-      var d = Math.min(w, h);
-      var k = 100;
-      ctx.moveTo(k, k + d / 4);
-      ctx.quadraticCurveTo(k, k, k + d / 4, k);
-      ctx.quadraticCurveTo(k + d / 2, k, k + d / 2, k + d / 4);
-      ctx.quadraticCurveTo(k + d / 2, k, k + d * 3/4, k);
-      ctx.quadraticCurveTo(k + d, k, k + d, k + d / 4);
-      ctx.quadraticCurveTo(k + d, k + d / 2, k + d * 3/4, k + d * 3/4);
-      ctx.lineTo(k + d / 2, k + d);
-      ctx.lineTo(k + d / 4, k + d * 3/4);
-      ctx.quadraticCurveTo(k, k + d / 2, k, k + d / 4);
-      ctx.stroke();
-      ctx.fill();
- 
-      ctx.font = "25px Times";
-      ctx.fillStyle = "#ffc2ab";
-      ctx.textAlign = "center";
-      ctx.fillText("Cada cubo vermelho que você pegou", 200, 50);
-      ctx.fillText("representa um ano de nossa história", 200, 80);
-
-      ctx.font = "25px Times";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-      ctx.fillText("Todo seu,", 200, 180);
-      ctx.fillText("Aninha", 200, 210);
-           
-      ctx.font = "600 35px Times";
-      ctx.fillStyle = "#ffc2ab";
-      ctx.textAlign = "center";
-      ctx.fillText("Feliz Dia dos Namorados", 200, 360); 
-    }
-		
-		window.addEventListener('keydown', moviment, true)
-		setInterval(game, 60)
-    
+  <script src="game.js">
 	</script>
 </body>
 </html>
