@@ -1,0 +1,23 @@
+{
+  "name": "valetines-day-easter-egg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx live-server src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaetaen/valetines-day-easter-egg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaetaen/valetines-day-easter-egg/issues"
+  },
+  "homepage": "https://github.com/kaetaen/valetines-day-easter-egg#readme",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
