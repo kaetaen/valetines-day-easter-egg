@@ -14,7 +14,15 @@
       <p> 0 </p>
     </div>
   <div>
+
   <script src="game.js">
 	</script>
+  <script>
+      var windowWidth = window.innerWidth;
+      if (windowWidth < 900) {
+        document.getElementById('content').style.display = 'none'
+        alert('Este aplicativo jogo só pode ser acessado através Notebooks e Desktops.')
+      }
+  </script>
 </body>
 </html>
